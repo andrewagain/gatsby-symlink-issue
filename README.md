@@ -1,4 +1,4 @@
-# Gatsby Mono
+# Gatsby Symlink Issue
 
 Seeing if it is possible to have Gatsby run its own babel processing on code that has been symlinked.
 
@@ -8,6 +8,8 @@ https://github.com/webpack/webpack/issues/1643
 
 ## To Run
 
+```
 cd my-site
 npm link ../common
-yarn develope
+npm run develop
+```
