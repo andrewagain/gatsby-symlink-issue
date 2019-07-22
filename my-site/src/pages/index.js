@@ -4,8 +4,8 @@ import Layout from "../components/layout"
 
 // symlinked code that relies on babel plugin
 // this does NOT work. comment out these two lines to get the build to work
-// import testFunction from "common/testFunction"
-// testFunction()
+import testFunction from "common/testFunction"
+testFunction()
 
 // test optional chaining babel plugin on the code within project root
 // This does not cause any problems:
