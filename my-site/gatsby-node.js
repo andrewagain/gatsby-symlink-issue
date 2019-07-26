@@ -12,21 +12,13 @@ exports.onCreateWebpackConfig = ({ actions, loaders, getConfig }) => {
   // Ensure that our babelrc settings will be applied to node_modules/common
   config.resolve.symlinks = false
 
-  config.module.rules = [
-    // Omit the default rule where test === '\.jsx?$'
-    ...config.module.rules.filter(
-      rule => String(rule.test) !== String(/\.jsx?$/)
-    ),
-    {
-      ...loaders.js(),
-      test: /\.js$/,
+  const jsxRule = config.module.rules.find(
+    rule => String(rule.test) === String(/\.jsx?$/)
+  )
+  // transpile node_modules/common but nothing else in node_modules
+  jsxRule.exclude = /node_modules\/(?!(common)\/).*/
 
-      // Exclude all node_modules from transpilation, except for 'common'
-      exclude: modulePath =>
-        /node_modules/.test(modulePath) &&
-        !/node_modules\/(common)/.test(modulePath),
-    },
-  ]
+  console.log("new rules", config.module.rules)
 
   // This will completely replace the webpack config with the modified object.
   actions.replaceWebpackConfig(config)
